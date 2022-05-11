@@ -2,11 +2,11 @@ const express = require('express');
 const { Router } = express;
 const cartRouter = Router();
 
-const { ProdContainer } = require('../models/CartContainer');
-const { CartContainer } = require('../models/ProductContainer');
+const { CartContainer } = require('../models/CartContainer');
+const { ProductContainer } = require('../models/ProductContainer');
 
 let cartContainer = new CartContainer();
-let prodContainer = new ProdContainer();
+let productContainer = new ProductContainer();
 
 cartRouter.get('/', (req, res) => {
     let carts = cartContainer.getAll();

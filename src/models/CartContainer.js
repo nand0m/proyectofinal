@@ -7,9 +7,9 @@ class CartContainer extends Container {
         this.id = (carts.length > 0) ? carts.length + 1 : 1;
     }
 
-    save(name, description) {
+    save(name, timestamp) {
         let carts = this.getAll();
-        let cart = {id:this.id, name: name, description: description, players: []}
+        let cart = {id:this.id, timestamp: timestamp, products: []}
         carts.push(cart);
         this.saveInFile(carts);
         this.id++;

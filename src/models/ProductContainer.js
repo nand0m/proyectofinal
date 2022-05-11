@@ -7,9 +7,18 @@ class ProductContainer extends Container {
         this.id = (products.length > 0) ? products.length + 1 : 1;
     }
 
-    save(name, number, age) {
+    save(name, description, code, thumbnail, price, stock) {
         let products = this.getAll();
-        let product = {id:this.id, name: name, number: number, age: age}
+        let product = {
+            id:this.id, 
+            timestamp: Date.now(), 
+            name: name,
+            description: description,
+            code: code,
+            thumbnail: thumbnail,
+            price: price,
+            stock: stock
+        }
         products.push(product);
         this.saveInFile(products);
         this.id++;
@@ -34,6 +43,31 @@ class ProductContainer extends Container {
 
         return product;
     }
+
+    updateById(product) {
+        let products = this.getAll();
+
+        let updatedProducts = products.map (i => {
+            if (i.id === product.id) {
+                i = product;
+            }
+            return i;
+        })
+
+        this.saveInFile(updatedProducts);
+    }
+
+    deleteById(id) {
+        let products = this.getAll();
+
+        let updatedProducts = products.filter(i => {
+            return i.id != id;
+        })
+
+        this.saveInFile(updatedProducts);
+    }
+
+
 }
 
 module.exports = { ProductContainer }
