@@ -11,18 +11,26 @@ let productContainer = new ProductContainer();
 cartRouter.get('/', (req, res) => {
     let carts = cartContainer.getAll();
 
-    res.json({cart: cart});
+    res.json({carts: carts});
 });
 
-cartRouter.post('/', (req, res) => {
-    let cart = req.body;
 
-    if (cart && cart.name && cart.description) {
-        cart = cartContainer.save(cart.name, cart.description);
-        res.json({result: 'cart saved', cart: cart});
-    } else {
-        res.json({result: 'cart cannot saved'});
-    }
+cartRouter.get('/:id/products', (req, res) => {
+    let cart = cartContainer.getById(req.params.id);
+
+    res.json({cart: cart.id, products: cart.products});
+});
+
+
+
+
+cartRouter.post('/', (req, res) => {
+    let cart = [];
+
+    cart = cartContainer.save();
+
+    res.json({result: 'cart saved', cart: cart.id});
+
 });
 
 cartRouter.post('/:id/products', (req, res) => {
@@ -37,5 +45,21 @@ cartRouter.post('/:id/products', (req, res) => {
         res.json({result: 'product cannot be added'});
     }
 });
+
+cartRouter.delete('/:id', (req, res) => {
+    let carts = cartContainer.deleteById(req.params.id);
+
+    res.json({result: 'cart deleted'});
+});
+
+cartRouter.delete('/:id/products/:id_prod', (req, res) => {
+    let carts = cartContainer.deleteItemById(req.params.id, req.params.id_prod);
+
+    res.json({cart: req.params.id, product: req.params.id_prod, result: 'item deleted'});
+});
+
+
+
+
 
 module.exports = cartRouter;

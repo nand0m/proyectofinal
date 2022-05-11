@@ -7,14 +7,19 @@ class CartContainer extends Container {
         this.id = (carts.length > 0) ? carts.length + 1 : 1;
     }
 
-    save(name, timestamp) {
+    save() {
         let carts = this.getAll();
-        let cart = {id:this.id, timestamp: timestamp, products: []}
+        let cart = {
+            id:this.id, 
+            timestamp: Date.now(), 
+            products: []
+        }
+
         carts.push(cart);
         this.saveInFile(carts);
         this.id++;
 
-        return cart;
+        return cart.id;
     }
 
     getAll() {
@@ -53,6 +58,40 @@ class CartContainer extends Container {
 
         return cart;
     }
+
+    deleteById(id) {
+        let carts = this.getAll();
+        let updatedCarts= carts.filter(i => {
+            return i.id != id;
+        })
+
+        this.saveInFile(updatedCarts);
+    }
+
+    deleteItemById(id, id_prod) {
+        let carts = this.getAll();
+
+        let updatedCarts = carts.map(i => {
+            if (i.id === id) {
+                i.products = i.filter(j => {
+                    return j.id != id_prod;
+                })
+            }
+            return i;
+       
+        })  
+
+        this.saveInFile(updatedCarts);
+    }
+
+
+
+
+
+
+
+
+    
 }
 
 module.exports = { CartContainer }

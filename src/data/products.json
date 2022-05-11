@@ -1,1 +1,1 @@
-[{"id":3,"timestamp":1652276819230,"name":"botella","description":"botella vidrio","code":"aaa-004","thumbnail":"img4.png","price":123,"stock":100}]
+[{"id":1,"timestamp":1652280174844,"name":"lampara","description":"lampara","code":"aaa-001","thumbnail":"img1.png","price":123,"stock":100},{"id":2,"timestamp":1652280190503,"name":"vaso","description":"vaso","code":"aaa-002","thumbnail":"img2.png","price":123,"stock":100},{"id":3,"timestamp":1652280209448,"name":"mesa","description":"mesa","code":"aaa-003","thumbnail":"img3.png","price":123,"stock":100}]
