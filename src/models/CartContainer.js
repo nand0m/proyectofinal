@@ -73,7 +73,8 @@ class CartContainer extends Container {
 
         let updatedCarts = carts.map(i => {
             if (i.id === id) {
-                i.products = i.filter(j => {
+
+                i.products = i.products.filter(j => {
                     return j.id != id_prod;
                 })
             }
